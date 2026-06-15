@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Volunteer Report</title>
+</head>
+<body>
+    <h1>Volunteer Report</h1>
+
+    <table border="1" id="reportTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Skills</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        async function loadVolunteers() {
+            const res = await fetch("http://127.0.0.1:3000/api/volunteers");
+            const data = await res.json();
+
+            const tbody = document.querySelector("#reportTable tbody");
+
+            data.forEach(v => {
+                tbody.innerHTML += `
+                <tr>
+                    <td>${v.name}</td>
+                    <td>${v.email}</td>
+                    <td>${v.phone}</td>
+                    <td>${v.skills}</td>
+                </tr>`;
+            });
+        }
+
+        loadVolunteers();
+    </script>
+</body>
+</html>
